@@ -41,24 +41,31 @@ formContainer.addEventListener('click', (e)=> {
 })
 
 let addRemoveFunc = (tiles) => {
-    let button = removeBook[removeBook.length - 1]
-    button.addEventListener('click', (e)=> {
-      console.log(e)
-      console.log(myLib)
-      let libIndex = button.parentElement.classList[1].split('').pop()
-      myLib.splice(libIndex, 1)
-      button.parentElement.remove()
-      console.log(myLib)
-      tiles = document.querySelectorAll('.lib-tile')
-      refreshTiles(libIndex, tiles);
-    })
-  }
+  let button = removeBook[removeBook.length - 1]
+  button.addEventListener('click', (e)=> {
+    console.log(e)
+    console.log(myLib)
+    let libIndex = button.parentElement.classList[1].split('').pop()
+    myLib.splice(libIndex, 1)
+    button.parentElement.remove()
+    console.log(myLib)
+    tiles = document.querySelectorAll('.lib-tile')
+    refreshTiles(libIndex, tiles);
+  })
+}
 
-  console.log(toggleRead)
-let addReadFunc = (tiles) => {
+let addReadFunc = (t = tiles) => {
   let button = toggleRead[toggleRead.length - 1]
   button.addEventListener('click', (e)=> {
-    
+    let libIndex = button.parentElement.classList[1].split('').pop()
+    if (myLib[libIndex]['read'] == "Haven't read it") {
+      myLib[libIndex]['read'] = "I've read it"
+    } else {
+      myLib[libIndex]['read'] = "Haven't read it"
+    }
+    console.log(myLib[libIndex].info())
+    console.log(myLib[libIndex])
+    button.parentNode.firstChild.textContent = myLib[libIndex].info()
   })
 }
 
@@ -70,7 +77,7 @@ function Book(title, author, pages, read) {
   this.pages = pages
   this.read = read
   this.info = () => {
-    return title.concat(' by ', author,', ', pages,' pages, ', read)
+    return this.title.concat(' by ', this.author,', ', this.pages,' pages, ', this.read)
   }
 }
 
@@ -93,21 +100,10 @@ function radioSelect() {
 
 function newTile(newBook, lib = library, t = tiles) {
   const div = document.createElement('div');
-  div.textContent = newBook.info();
-  div.classList.add('lib-tile');
-  div.classList.add(`tile-${myLib.length-1}`);
 
-  div.appendChild(document.createElement('br'))
-
-  const delBtn = document.createElement('button')
-  delBtn.classList.add('del-btn')
-  delBtn.textContent = 'Remove';
-  div.appendChild(delBtn)
-
-  const read = document.createElement('button')
-  read.classList.add('read-btn')
-  read.textContent = 'Read'
-  div.appendChild(read);
+  addContentToDiv(newBook, div);
+  addDelBtn(div);
+  addReadBtn(div);
 
   lib.appendChild(div)
   removeBook = document.querySelectorAll(".del-btn")
@@ -115,6 +111,28 @@ function newTile(newBook, lib = library, t = tiles) {
   bookNumber++;
   addRemoveFunc(t);
   addReadFunc(t);
+}
+
+function addContentToDiv(newBook, div) {
+  const p = document.createElement('p')
+  p.textContent = newBook.info();
+  div.appendChild(p)
+  div.classList.add('lib-tile');
+  div.classList.add(`tile-${myLib.length-1}`);
+}
+
+function addDelBtn(div) {
+  const delBtn = document.createElement('button')
+  delBtn.classList.add('del-btn')
+  delBtn.textContent = 'Remove';
+  div.appendChild(delBtn)
+}
+
+function addReadBtn(div) {
+  const read = document.createElement('button')
+  read.classList.add('read-btn')
+  read.textContent = 'Read'
+  div.appendChild(read);
 }
 
 function bringUpForm(cont = formContainer) {

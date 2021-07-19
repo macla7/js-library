@@ -151,12 +151,6 @@ function refreshTiles(libIndex, tiles) {
 }
 
 
-
-
-
-
-
-
 // Set up myLib array
 let myLib = [];
 const theHobbit = addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, "Haven't read it")

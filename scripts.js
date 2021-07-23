@@ -10,8 +10,6 @@ let toggleRead = document.querySelectorAll(".read-btn");
 let tiles;
 
 
-
-
 // Event Listeners
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -71,18 +69,20 @@ let addReadFunc = (t = tiles) => {
 
 
 // Functions
-function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
-  this.info = () => {
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
+
+  info = () => {
     return this.title.concat(' by ', this.author,', ', this.pages,' pages, ', this.read)
   }
 }
 
-function addBookToLibrary(title, author, pages, read, library, tiles) {
-  console.log([...arguments])
+function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read)
   myLib.push(newBook)
   newTile(newBook);

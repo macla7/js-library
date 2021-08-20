@@ -13,11 +13,10 @@
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   grid-template-rows: 1fr auto 1fr;
-  grid-template-areas: 
+  grid-template-areas:
     ". . ."
     ". form ."
-    ". . ."
-  ;
+    ". . .";
   left: 0;
   top: 0;
   width: 100vw;
@@ -46,4 +45,16 @@
     display: grid;
     grid-template-columns: 1fr minmax(10rem, 1fr);
   }
+}
+
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:invalid:required {
+  // background-image: linear-gradient(to right, pink, lightgreen);
+}
+
+input:valid {
+  border: 2px solid black;
 }

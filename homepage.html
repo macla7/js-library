@@ -1,39 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel='stylesheet' href='/css/main_style.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main_style.css" />
   </head>
   <body>
     <h1>Library</h1>
-    <button type='button' id='show'>NEW BOOK</button>
-    <section class='form-container' id='form-container'>
-      <form id='form'>
-        <div class='form-item'>
-          <label for='title'>Book Title:</label>
-          <input type='text' name='title' id='title'><br>
+    <button type="button" id="show">NEW BOOK</button>
+    <section class="form-container" id="form-container">
+      <form id="form">
+        <div class="form-item">
+          <label for="title">
+            Book Title:
+            <abbr title="This field is mandatory" aria-label="required">*</abbr>
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            maxlength="50"
+          /><br />
         </div>
-        <div class='form-item'>
-          <label for='author'>Author:</label>
-          <input type='text' name='author' id='author'><br>
+        <div class="form-item">
+          <label for="author">
+            Author:
+            <abbr title="This field is mandatory" aria-label="required">*</abbr>
+          </label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            required
+            maxlength="50"
+          /><br />
         </div>
-        <div class='form-item'>
-          <label for='pages'>Number of Pages:</label>
-          <input type='number' name='pages' id='pages'><br>
+        <div class="form-item">
+          <label for="pages">Number of Pages:</label>
+          <input
+            type="number"
+            name="pages"
+            id="pages"
+            min="1"
+            max="10000"
+          /><br />
         </div>
         <p>Have you read it yet?</p>
-        <label for='read'>Yes</label>
-        <input type='radio' name='read' value='yes' id='read'>
-        <label for='read'>No</label>
-        <input type='radio' name='read' value='no'><br>
-        <div id='form-controls'>
-          <input type='submit' value='Add' id='submit'>
-          <button type='button' id='close'>Close</button>
+        <label for="read">Yes</label>
+        <input type="radio" name="read" value="yes" id="read" />
+        <label for="read">No</label>
+        <input type="radio" name="read" value="no" /><br />
+        <div id="form-controls">
+          <input type="submit" value="Add" id="submit" />
+          <button type="button" id="close">Close</button>
         </div>
       </form>
     </section>
-    <section id='library'>
-    </section>
+    <section id="library"></section>
   </body>
-  <script src="/scripts.js"></script>
+  <script src="/scripts.mjs" type="module"></script>
 </html>
